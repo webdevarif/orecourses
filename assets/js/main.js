@@ -84,14 +84,39 @@
                     iframe:{
                     patterns:{
                         youtube:{
-                        index: 'youtube.com',
-                        id: 'v=',
-                        src: 'https://www.youtube.com/embed/%id%'
+                            index: 'youtube.com',
+                            id: 'v=',
+                            src: 'https://www.youtube.com/embed/%id%'
+                        },
                     },
+                        srcAction:'iframe_src',
                     },
-                    srcAction:'iframe_src',
-                },
-                    fixedContentPos: false
+                    fixedContentPos: false,
+                });
+            }
+
+            if($('.hover-video').length){
+                const videos = document.querySelectorAll('.hover-video');
+
+                videos.forEach(video => {
+                    video.addEventListener('mouseenter', () => {
+                        video.play();
+                    });
+                    
+                    video.addEventListener('mouseleave', () => {
+                        video.pause();
+                        video.currentTime = 0;
+                    });
+
+                    video.addEventListener('click', () => {
+                        if (video.paused) {
+                            video.play();
+                        } else {
+                            video.pause();
+                            video.currentTime = 0;
+                        }
+                    });
+
                 });
             }
         },
